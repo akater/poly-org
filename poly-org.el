@@ -44,7 +44,7 @@
 
 (defun poly-org-mode-matcher ()
   (let ((case-fold-search t))
-    (when (re-search-forward "#\\+begin_\\(src\\|example\\|export\\) +\\([^ \t\n]+\\)" (point-at-eol) t)
+    (when (re-search-forward "#\\+begin_\\(src\\|example\\|export\\) +\\([^ \t\n]+\\)" (line-end-position) t)
       (let ((lang (match-string-no-properties 2)))
         (or (cdr (assoc lang org-src-lang-modes))
             lang)))))
