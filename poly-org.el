@@ -51,6 +51,7 @@
 
 (defvar ess-local-process-name)
 (defvar slime-buffer-package)
+(defvar sly-buffer-package)
 (defun poly-org-convey-src-block-params-to-inner-modes (_ this-buf)
   "Move src block parameters to innermode specific locals.
 Used in :switch-buffer-functions slot."
@@ -76,7 +77,9 @@ Used in :switch-buffer-functions slot."
       (let ((params (nth 2 (org-babel-get-src-block-info t))))
         (with-current-buffer this-buf
           (setq-local slime-buffer-package
-                      (cdr (assq :package params)))))))))
+                      (cdr (assq :package params)))
+          (setq-local sly-buffer-package
+                      slime-buffer-package)))))))
 
 (define-hostmode poly-org-hostmode
   :mode 'org-mode
